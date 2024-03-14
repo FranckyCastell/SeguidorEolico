@@ -159,4 +159,26 @@ void loop()
         Serial.println("NORTE");
     }
     // SECCION VELETA
+
+    // SECCION PALAS
+    if (VelocidadViento > 25) // SUPONEMOS QUE 25 ES UMBRAL VIENTO FUERTE
+    {
+        servo1.write(0); // ANGULO MODO BANDERA
+        servo2.write(0);
+        servo3.write(0);
+    }
+    else if (VelocidadViento < 5)
+    {                    // SUPONEMOS QUE 5 ES UMBRAL VIENTO FLOJO
+        servo1.write(0); // ANGULO MODO BANDERA
+        servo2.write(0);
+        servo3.write(0);
+    }
+    else
+    {
+        // VIENTO NORMAL
+        servo1.write(90); // ANGULO MODO NORMAL
+        servo2.write(90);
+        servo3.write(90);
+    }
+    // SECCION PALAS
 }
