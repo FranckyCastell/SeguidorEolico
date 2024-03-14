@@ -19,6 +19,10 @@ Servo SPala2;  // SERVO PARA LA PALA 2
 Servo SPala3;  // SERVO PARA LA PALA 3
 // CREACION DE LOS SERVO MOTORES
 
+// CLEAN BUFFER
+int Clean_Buffer = 39; // CLEAN BOOFER VALOR "GROUND" = 0
+// CLEAN BUFFER
+
 // VARIABLES DEL ANEMOMETRO
 int ValorSensor = 0;                            // VALOR DEL SENSOR
 float VoltajeSensor = 0;                        // VOLTAJE DEL SENSOR
@@ -29,7 +33,7 @@ float ConstanteConversionVoltaje = 0.004882814; // CONSTANTE DE CONVERSIÓN DE V
 // VARIABLES DE LA VELETA
 int PinVeleta = 20;  // ENTRADA DE PIN VELETA
 int ValorVeleta = 0; // VALOR VELETA
-int AnguloServoVeleta = 0;
+int AnguloServoVeleta = 0; // ANGULO DEL SERVO DE LA VELETA
 
 int ValorNorte = 0;                          // VALOR NORTE
 int ValorEste = 255;                         // VALOR ESTE
@@ -64,6 +68,7 @@ void setup()
         while (true)
             ;
     }
+// INICIAMOS PANTALLA OLED
 }
 
 void loop()
@@ -74,6 +79,10 @@ void loop()
     display.setTextSize(1);              // DEFINIMOS TAMAÑO DEL TEXTO QUE SE VA A MOSTRAR EL 1 ES EL TAMAÑO MINIMO
     display.setTextColor(SSD1306_WHITE); // COLOR DEL TEXTO
     // OLED CONSTANTS
+
+    // CLEAN BUFFER
+    analogRead(Clean_Buffer); // PONEMOS EL BUFFER A VALOR DE 0
+    // CLEAN BUFFER
 
     // SECCION ANEMOMETRO
     ValorSensor = analogRead(A0); // VALOR PIN ANALOGICO
