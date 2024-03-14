@@ -1,4 +1,5 @@
-#include <Servo.h>
+//#include <Servo.h>
+#include <ESP32Servo.h>
 #define __DEBUG__
 #include <SPI.h>
 #include <Wire.h>
@@ -26,7 +27,7 @@ float ConstanteConversionVoltaje = 0.004882814; // CONSTANTE DE CONVERSIÓN DE V
 // VARIABLES PARA EL ANEMOMETRO
 
 // VARIABLES DE LA VELETA
-int PinVeleta = A1;  // ENTRADA DE PIN VELETA
+int PinVeleta = 20;  // ENTRADA DE PIN VELETA
 int ValorVeleta = 0; // VALOR VELETA
 int AnguloServoVeleta = 0;
 
@@ -34,10 +35,10 @@ int ValorNorte = 0;                          // VALOR NORTE
 int ValorEste = 255;                         // VALOR ESTE
 int ValorSur = 511;                          // VALOR SUR
 int ValorOeste = 767;                        // VALOR OESTE
-int ValorNE = (valorNorte + valorEste) / 2;  // VALOR NORESTE
-int ValorSE = (valorSur + valorEste) / 2;    // VALOR SURESTE
-int ValorSO = (valorSur + valorOeste) / 2;   // VALOR SUROESTE
-int ValorNO = (valorNorte + valorOeste) / 2; // VALOR NOROESTE
+int ValorNE = (ValorNorte + ValorEste) / 2;  // VALOR NORESTE
+int ValorSE = (ValorSur + ValorEste) / 2;    // VALOR SURESTE
+int ValorSO = (ValorSur + ValorOeste) / 2;   // VALOR SUROESTE
+int ValorNO = (ValorNorte + ValorOeste) / 2; // VALOR NOROESTE
 // VARIABLES DE LA VELETA
 
 void setup()
@@ -121,7 +122,7 @@ void loop()
         AnguloServoVeleta = 0; // NORTE
     }
 
-    miServo.write(AnguloServoVeleta); // MOVEMOS SERVO AL ANGULO DESEADO
+    SViento.write(AnguloServoVeleta); // MOVEMOS SERVO AL ANGULO DESEADO
 
     Serial.print("VALOR VELETA: ");
     Serial.print(ValorVeleta);
@@ -163,22 +164,22 @@ void loop()
     // SECCION PALAS
     if (VelocidadViento > 25) // SUPONEMOS QUE 25 ES UMBRAL VIENTO FUERTE
     {
-        servo1.write(0); // ANGULO MODO BANDERA
-        servo2.write(0);
-        servo3.write(0);
+        SPala1.write(0); // ANGULO MODO BANDERA
+        SPala2.write(0);
+        SPala3.write(0);
     }
     else if (VelocidadViento < 5)
     {                    // SUPONEMOS QUE 5 ES UMBRAL VIENTO FLOJO
-        servo1.write(0); // ANGULO MODO BANDERA
-        servo2.write(0);
-        servo3.write(0);
+        SPala1.write(0); // ANGULO MODO BANDERA
+        SPala2.write(0);
+        SPala3.write(0);
     }
     else
     {
         // VIENTO NORMAL
-        servo1.write(90); // ANGULO MODO NORMAL
-        servo2.write(90);
-        servo3.write(90);
+        SPala1.write(90); // ANGULO MODO NORMAL
+        SPala2.write(90);
+        SPala3.write(90);
     }
     // SECCION PALAS
 }
